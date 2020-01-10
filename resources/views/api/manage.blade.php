@@ -11,14 +11,15 @@
         </div>
         <div class="row">
             <div class="col-12 mb-3">
-                <passport-clients></passport-clients>
+                <passport-personal-access-tokens></passport-personal-access-tokens>
             </div>
             <div class="col-12 mb-3">
                 <passport-authorized-clients></passport-authorized-clients>
             </div>
             <div class="col-12 mb-3">
-                <passport-personal-access-tokens></passport-personal-access-tokens>
+                <passport-clients></passport-clients>
             </div>
+
         </div>
     </div>
 
