@@ -7,7 +7,6 @@ use App\Http\Requests\StoreConnectionRequest;
 use App\User;
 use Auth;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Http\Request;
 
 class OnboardingController extends Controller
 {

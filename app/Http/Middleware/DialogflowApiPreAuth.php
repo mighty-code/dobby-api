@@ -21,7 +21,7 @@ class DialogflowApiPreAuth
         $userToken = array_get($originalRequest, 'payload.user.accessToken');
 
         if ($userToken) {
-            $request->headers->add(['Authorization' => 'Bearer ' . $userToken]);
+            $request->headers->add(['Authorization' => 'Bearer '.$userToken]);
         }
 
         return $next($request);

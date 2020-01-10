@@ -2,10 +2,10 @@
 
 namespace App\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\NotFirstLogin;
-use App\Http\Middleware\FirstLogin;
 use App\Http\Middleware\DialogflowApiPreAuth;
+use App\Http\Middleware\FirstLogin;
+use App\Http\Middleware\NotFirstLogin;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
 {
@@ -46,7 +46,7 @@ class Kernel extends HttpKernel
         ],
         'dialogflow-api' => [
             'bindings',
-            'dialogflow.pre-auth'
+            'dialogflow.pre-auth',
         ],
     ];
 

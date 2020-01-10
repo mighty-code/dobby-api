@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UpdateNextConnection;
 use App\Connection;
+use App\Events\UpdateNextConnection;
+use App\Http\Requests\StoreConnectionRequest;
+use App\Services\ConnectionService;
+use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StoreConnectionRequest;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
-use App\Services\ConnectionService;
 
 class ConnectionController extends Controller
 {

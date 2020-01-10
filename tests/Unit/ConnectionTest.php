@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Carbon\Carbon;
 use App\Connection;
+use Carbon\Carbon;
+use Tests\TestCase;
 
 class ConnectionTest extends TestCase
 {

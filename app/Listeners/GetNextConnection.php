@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdateNextConnection;
-use Carbon\Carbon;
-
 use App\Connection;
+use App\Events\UpdateNextConnection;
 use App\Services\ViadiClient;
+use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 
 class GetNextConnection

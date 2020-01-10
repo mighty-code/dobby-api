@@ -32,12 +32,12 @@ class ViadiClient
     {
         $via = $via ? ['via' => $via] : null;
 
-        $connections = json_decode($this->client->request('GET', ViadiClient::BASE_URL . '/connection', [
+        $connections = json_decode($this->client->request('GET', ViadiClient::BASE_URL.'/connection', [
             'query' => [
                 'from' => $from,
                 'to'   => $to,
                 'time' => $time,
-                $via
+                $via,
             ],
         ])->getBody())->connections;
 
@@ -46,10 +46,10 @@ class ViadiClient
 
     public function searchStation($query)
     {
-        $stations = json_decode($this->client->request('GET', ViadiClient::BASE_URL . '/stations', [
+        $stations = json_decode($this->client->request('GET', ViadiClient::BASE_URL.'/stations', [
             'query' => [
-                'query' => $query
-            ]
+                'query' => $query,
+            ],
         ])->getBody());
 
         return $stations;

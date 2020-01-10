@@ -46,6 +46,6 @@ return [
 
     'viadi' => [
         'api-key' => env('VIADI_API_KEY'),
-    ]
+    ],
 
 ];
