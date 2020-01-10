@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Services\ViadiClient;
 use Illuminate\Http\Request;
 
-class StationController extends Controller
+class StationSearchController extends Controller
 {
-    public function search(Request $request, ViadiClient $viadiClient)
+    public function __invoke(Request $request, ViadiClient $viadiClient)
     {
         return $viadiClient->searchStation($request->get('query'));
     }

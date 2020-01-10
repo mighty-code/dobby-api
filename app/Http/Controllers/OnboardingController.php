@@ -15,7 +15,7 @@ class OnboardingController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreConnectionRequest $request)
+    public function __invoke(StoreConnectionRequest $request)
     {
         $connection = auth()->user()->connections()->create([
             'from'            => $request->from['name'],
