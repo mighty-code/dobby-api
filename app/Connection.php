@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
 use Carbon\Carbon;
+use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Connection extends Model
 {
@@ -43,7 +43,7 @@ class Connection extends Model
     }
 
     /**
-     * Connections belongs to one user
+     * Connections belongs to one user.
      */
     public function user()
     {
@@ -55,6 +55,7 @@ class Connection extends Model
         $departure = Carbon::createFromTimestamp($this->departure / 1000);
         $leaveAt = $departure->clone()->subMinutes($this->time_to_station)->timestamp;
         $diff = ($leaveAt - Carbon::now()->timestamp) / 60;
+
         return floor($diff);
     }
 }

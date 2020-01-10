@@ -19,5 +19,5 @@ Route::middleware('auth:api')->group(function () {
         return $request->user();
     });
 
-    Route::get('connection/next', [ConnectionController::class, 'nextConnection' ]);
+    Route::get('connection/next', [ConnectionController::class, 'nextConnection']);
 });

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class LocalEnvironmentServiceProvider extends ServiceProvider
@@ -19,7 +19,7 @@ class LocalEnvironmentServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Facade aliases only should be loaded in development
+     * Facade aliases only should be loaded in development.
      *
      * @var array
      */
@@ -28,7 +28,7 @@ class LocalEnvironmentServiceProvider extends ServiceProvider
     ];
 
     /**
-     * Register Service Providers
+     * Register Service Providers.
      */
     protected function registerServiceProviders()
     {

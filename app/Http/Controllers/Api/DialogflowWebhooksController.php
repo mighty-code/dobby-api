@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\ConnectionService;
 use Dialogflow\Action\Questions\Permission;
+use Illuminate\Http\Request;
 
 class DialogflowWebhooksController extends Controller
 {
@@ -17,7 +17,7 @@ class DialogflowWebhooksController extends Controller
 
         $conv = $agent->getActionConversation();
 
-        logger()->info('receiving indent from dialogflow: ' . $agent->getIntent());
+        logger()->info('receiving indent from dialogflow: '.$agent->getIntent());
 
         $device = $conv->getDevice();
         if (! $device || ! $device->getLocation()) {
