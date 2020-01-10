@@ -34,11 +34,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('connection/{id}/default', 'ConnectionController@makeDefault');
     });
 
-
-
     Route::view('/onboarding', 'onboarding')->name('onboarding');
     Route::post('/onboarding', 'OnboardingController@store')->name('onboarding.store');
 
-
     Route::get('stations/search', 'StationController@search');
+});
+
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('admin_logs');
 });

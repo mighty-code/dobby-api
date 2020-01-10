@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'notFirstLogin' => NotFirstLogin::class,
         'firstLogin' => FirstLogin::class,
+        'admin' => \App\Http\Middleware\IsAdmin::class,
     ];
 
     /**
