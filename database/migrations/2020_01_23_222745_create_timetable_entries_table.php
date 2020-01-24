@@ -18,12 +18,12 @@ class CreateTimetableEntriesTable extends Migration
             $table->unsignedInteger('connection_id');
 
             $table->string('departure_from');
-            $table->string('departure_at_utc');
+            $table->integer('departure_at_utc');
             $table->integer('departure_delay');
             $table->string('departure_platform');
 
             $table->string('arrival_to');
-            $table->string('arrival_at_utc');
+            $table->integer('arrival_at_utc');
             $table->integer('arrival_delay');
             $table->string('arrival_platform');
 
