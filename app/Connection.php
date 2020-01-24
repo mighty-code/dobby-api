@@ -50,6 +50,11 @@ class Connection extends Model
         $this->belongsTo(User::class);
     }
 
+    public function timetableEntries()
+    {
+        return $this->hasMany(TimetableEntry::class);
+    }
+
     public function leaveInMinutes()
     {
         $departure = Carbon::createFromTimestamp($this->departure / 1000);
