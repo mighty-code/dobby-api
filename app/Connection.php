@@ -57,7 +57,12 @@ class Connection extends Model
 
     public function leaveInMinutes()
     {
-        $departure = Carbon::createFromTimestamp($this->departure / 1000);
+        $nextConnection = $this->timetableEntries()->first();
+        if(!$nextConnection) {
+            return 0;
+        }
+
+        $departure = Carbon::createFromTimestamp($nextConnection->departure_at_utc);
         $leaveAt = $departure->clone()->subMinutes($this->time_to_station)->timestamp;
         $diff = ($leaveAt - Carbon::now()->timestamp) / 60;
 
