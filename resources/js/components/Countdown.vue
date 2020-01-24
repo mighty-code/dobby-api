@@ -14,6 +14,7 @@
             <div class="col-2 d-flex justify-content-center align-items-center flex-column">
                 <span v-if="connection.departure_platform">Platform {{ connection.departure_platform }}</span>
                 <i class="fas fa-long-arrow-alt-right fs-5"></i>
+                <span v-if="connection.arrival_platform">Platform {{ connection.arrival_platform }}</span>
             </div>
             <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                 <i class="fa fa-map-marker-alt connection-text mb-3"></i>
@@ -37,23 +38,23 @@
 
         computed: {
             departureTime() {
-                return moment(this.connection.departure).format('H:mm')
+                return moment.unix(this.connection.departure).format('H:mm')
             },
 
             arrivalTime() {
-                return moment(this.connection.arrival).format('H:mm')
+                return moment.unix(this.connection.arrival).format('H:mm')
             }
         },
 
         methods: {
 
-            getNextConnection() {
-                axios
-                    .get('/connection/next')
-                    .then(response => {
-                        this.connection = response.data
-                    })
-                    .catch(error => console.log(error))
+            async getNextConnection() {
+                try {
+                    const { data } = await axios.get('/connection/next')
+                     this.connection = data.data
+                } catch (error) {
+                    console.log(error)
+                }
             },
 
         },
@@ -62,7 +63,7 @@
             this.getNextConnection()
 
             setInterval(() => {
-                let departure = moment(this.connection.departure).utc();
+                let departure = moment.unix(this.connection.departure).utc();
                 let now = moment().utc();
                 let leaveIn = departure.diff(now, 'minutes');
                 let leaveInHours = departure.diff(now, 'hours');
