@@ -50,12 +50,11 @@ class ConnectionController extends Controller
 
     public function makeDefault($id)
     {
-        auth()->user()->connections()->get()->map(function ($connection) {
-            $connection->selected = false;
-            $connection->save();
-        });
+        auth()->user()->connections()->update([
+            'selected' => false
+        ]);
 
-        $connection = Connection::find($id);
+        $connection = Connection::findOrFail($id);
         $connection->selected = true;
         $connection->save();
     }
