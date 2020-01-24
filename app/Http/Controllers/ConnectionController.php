@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Connection;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
+use App\Http\Resources\NextConnectionResource;
 use App\Services\ConnectionService;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class ConnectionController extends Controller
             return null;
         }
 
-        return $connection;
+        return NextConnectionResource::make($connection);
     }
 
     public function store(StoreConnectionRequest $request)
