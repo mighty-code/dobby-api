@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Connection;
+use App\Events\SelectedConnectionUpdated;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -33,13 +34,16 @@ class ConnectionController extends Controller
 
     public function makeDefault($id)
     {
-        auth()->user()->connections()->update([
+        $user = Auth::user();
+        $user->connections()->update([
             'selected' => false,
         ]);
 
         $connection = Connection::findOrFail($id);
         $connection->selected = true;
         $connection->save();
+
+        event(new SelectedConnectionUpdated($user));
     }
 
     public function myConnections()
