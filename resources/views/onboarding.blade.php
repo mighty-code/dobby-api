@@ -7,7 +7,7 @@
         <p>I'll let you know when you have to leave your place to catch the next connection.</p>
         <div class="row mt-4" style="min-width: 300px">
             <div class="col-12">
-                <create-connection onboarding submit_text="Continue"></create-connection>
+                <create-connection onboarding submit-text="Continue"></create-connection>
             </div>
         </div>
     </div>

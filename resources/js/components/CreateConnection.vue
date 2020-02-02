@@ -62,11 +62,11 @@ export default {
     props: {
         onboarding: {
             type: String,
-            required: true,
+            default: () => '',
         },
         submitText: {
             type: String,
-            required: true,
+            default: () => '',
         },
     },
 

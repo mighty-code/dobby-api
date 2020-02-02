@@ -11,11 +11,11 @@
 export default {
     props: {
         id: {
-            type: String,
+            type: Number,
             required: true,
         },
         selected: {
-            type: Boolean,
+            type: Number,
             required: true,
         },
     },
