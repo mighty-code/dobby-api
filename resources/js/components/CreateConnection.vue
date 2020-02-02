@@ -99,18 +99,16 @@ export default {
             this.connection.via = station
         },
 
-        create() {
+        async create() {
             let apiUrl =
                 this.onboarding != null ? '/onboarding' : '/user/connections'
             let redirectUrl = this.onboarding != null ? '/home' : '/manage'
-            axios
-                .post(apiUrl, this.connection)
-                .then(response => {
-                    window.location.href = redirectUrl
-                })
-                .catch(error => {
-                    this.error = error.response.data.message
-                })
+            try {
+                await axios.post(apiUrl, this.connection)
+                window.location.href = redirectUrl
+            } catch (error) {
+                this.error = error.response.data.message
+            }
         },
     },
 }

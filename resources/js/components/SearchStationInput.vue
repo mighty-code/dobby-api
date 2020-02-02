@@ -45,17 +45,17 @@ export default {
     },
 
     methods: {
-        search: _.debounce(function() {
+        search: _.debounce(async function() {
             if (this.query.length >= 2) {
-                axios
-                    .get('/stations/search', {
+                try {
+                    const { data } = await axios.get('/stations/search', {
                         params: { query: this.query },
                     })
-                    .then(response => {
-                        this.stations = response.data
-                        this.stations.splice(3)
-                    })
-                    .catch(error => console.error(error))
+                    this.stations = data
+                    this.stations.splice(3)
+                } catch (error) {
+                    console.error(error)
+                }
             }
         }, 250),
 

@@ -20,18 +20,14 @@ export default {
         },
     },
 
-    mounted() {},
-
     methods: {
-        makeDefault() {
-            axios
-                .post(`/connection/${this.id}/default`)
-                .then(response => {
-                    this.$emit('done')
-                })
-                .catch(error => {
-                    console.error(error)
-                })
+        async makeDefault() {
+            try {
+                await axios.post(`/connection/${this.id}/default`)
+                this.$emit('done')
+            } catch (error) {
+                console.error(error)
+            }
         },
     },
 }
