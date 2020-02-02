@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ConnectionController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ConnectionController;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,8 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', UserProfileController::class);
 
-    Route::get('connection/next', [ConnectionController::class, 'nextConnection']);
+    Route::get('connections/next', [ConnectionController::class, 'nextConnection']);
+    Route::get('connections/timetable', [ConnectionController::class, 'timetable']);
 });
