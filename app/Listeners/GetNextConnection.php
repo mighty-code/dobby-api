@@ -76,7 +76,7 @@ class GetNextConnection
             'arrival_to' => $connection->to->location->name,
             'arrival_at_utc' => $connection->to->time / 1000,
             'arrival_delay' => $connection->to->delay,
-            'arrival_platform' => $connection->to->platform,
+            'arrival_platform' =>  data_get($connection, 'to.platform'),
 
             'duration_minutes' => $this->duration($connection->duration),
             'route' => $route,
