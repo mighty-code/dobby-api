@@ -58,18 +58,19 @@ export default {
         this.getNextConnection()
 
         setInterval(() => {
-            let departure = moment.unix(this.connection.departure).utc()
-            let now = moment().utc()
-            let leaveIn = departure.diff(now, 'minutes')
-            let leaveInHours = departure.diff(now, 'hours')
-            leaveIn += leaveInHours * 60
-            leaveIn = leaveIn - this.connection.time_to_station
+            const leaveIn = this.calculateCountdown()
+            let countdown = leaveIn
 
-            console.log('calculateCountdown() leaveIn:=', leaveIn)
+            if (countdown <= 0) {
+                countdown = 'now'
+            } else if (countdown > 60) {
+                countdown = '>60'
+            }
 
-            this.countdown = leaveIn
-
-            if (this.countdown <= 0) this.getNextConnection()
+            this.countdown = countdown
+            if (leaveIn <= 0) {
+                this.getNextConnection()
+            }
         }, 1000)
     },
 
@@ -79,8 +80,18 @@ export default {
                 const { data } = await axios.get('/api/connections/next')
                 this.connection = data.data
             } catch (error) {
-                console.log(error)
+                console.error(error)
             }
+        },
+        calculateCountdown() {
+            const departure = moment.unix(this.connection.departure).utc()
+            const now = moment().utc()
+            let leaveIn = departure.diff(now, 'minutes')
+            let leaveInHours = departure.diff(now, 'hours')
+            leaveIn += leaveInHours * 60
+            leaveIn = leaveIn - this.connection.time_to_station
+
+            return leaveIn
         },
     },
 }

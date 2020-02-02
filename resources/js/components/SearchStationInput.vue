@@ -55,7 +55,7 @@ export default {
                         this.stations = response.data
                         this.stations.splice(3)
                     })
-                    .catch(error => console.log(error))
+                    .catch(error => console.error(error))
             }
         }, 250),
 

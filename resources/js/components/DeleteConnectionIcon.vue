@@ -28,7 +28,7 @@ export default {
                 })
                 .catch(error => {
                     this.error = error.response.data.message
-                    console.log(this.error)
+                    console.error(this.error)
                 })
         },
     },
