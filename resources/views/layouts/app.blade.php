@@ -25,11 +25,14 @@
     @php
         $user = Auth::user()
     @endphp
+    @isset($user)
     <script>
         window.App = {
             User:  @json($user->only(['id', 'name']))
         }
     </script>
+    @endisset
+
 </head>
 <body>
 <div id="app">
