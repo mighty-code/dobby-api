@@ -12,11 +12,9 @@
                             <span class="text-muted"><a href="{{ route('manage') }}" class="link-unstyled"><i
                                             class="fa fa-code-branch"></i> Connections</a></span>
                         </div>
-                        @if($extensionUrl = config('dobby.chrome-extension-url'))
                         <div class="col-12">
-                            <span class="text-muted"><a href="{{$extensionUrl}}" target="_blank" class="link-unstyled"><i class="fab fa-chrome"></i> Chrome Extension</a></span>
+                            <span class="text-muted"><a href="{{ url('storage/extension.crx')}}" target="_blank" class="link-unstyled"><i class="fab fa-chrome"></i> Chrome Extension</a></span>
                         </div>
-                        @endif
                         <div class="col-12">
                             <span class="text-muted"><a href="{{ route('api.manage') }}" class="link-unstyled"><i
                                             class="fa fa-puzzle-piece"></i> API</a></span>
