@@ -21,6 +21,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     @include('includes.google-tag-manager')
+
+    @php
+        $user = Auth::user()
+    @endphp
+    <script>
+        window.App = {
+            User:  @json($user->only(['id', 'name']))
+        }
+    </script>
 </head>
 <body>
 <div id="app">

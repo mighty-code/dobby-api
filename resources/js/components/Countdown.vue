@@ -56,8 +56,18 @@ export default {
 
     mounted() {
         this.getNextConnection()
+        this.subscribe()
 
-        setInterval(() => {
+        setInterval(() => this.setCountdown(), 1000)
+    },
+
+    methods: {
+        init() {
+            this.getNextConnection()
+            this.subscribe()
+            this.setCountdown()
+        },
+        setCountdown() {
             const leaveIn = this.calculateCountdown()
             let countdown = leaveIn
 
@@ -71,10 +81,7 @@ export default {
             if (leaveIn <= 0) {
                 this.getNextConnection()
             }
-        }, 1000)
-    },
-
-    methods: {
+        },
         async getNextConnection() {
             try {
                 const { data } = await axios.get('/api/connections/next')
@@ -92,6 +99,15 @@ export default {
             leaveIn = leaveIn - this.connection.time_to_station
 
             return leaveIn
+        },
+        subscribe() {
+            Echo.private(`App.User.${App.User.id}`).listen(
+                'SelectedConnectionUpdated',
+                e => {
+                    console.log('SelectedConnectionUpdated this:=', this)
+                    this.getNextConnection()
+                }
+            )
         },
     },
 }
