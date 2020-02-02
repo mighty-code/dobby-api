@@ -58,14 +58,13 @@ class GetNextConnection
         foreach ($connections as $connection) {
             $this->saveTimetableEntries($connection, $connectionModel);
         }
-
     }
 
     public function saveTimetableEntries($connection, Connection $connectionModel)
     {
-        $sections = collect($connection->sections)->filter(fn($section) => isset($section->route));
-        $routes = $sections->map(fn($section) => $section->route);
-        $route = $routes->map(fn($route) => $route->name);
+        $sections = collect($connection->sections)->filter(fn ($section) => isset($section->route));
+        $routes = $sections->map(fn ($section) => $section->route);
+        $route = $routes->map(fn ($route) => $route->name);
 
         $timetableEntry = [
             'departure_from' => $connection->from->location->name,
@@ -95,5 +94,4 @@ class GetNextConnection
     {
         return Carbon::now()->addMinutes($timeToStation)->timestamp * 1000;
     }
-
 }
