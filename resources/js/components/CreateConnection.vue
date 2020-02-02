@@ -21,7 +21,9 @@
         <div class="form-group">
             <input v-model="connection.time_to_station" placeholder="Time to station (Minutes)" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn-block">{{ submit_text }}</button>
+        <button type="submit" class="btn btn-outline-primary btn-block"
+            :disabled="!connection.to || !connection.from || !connection.time_to_station"
+            >{{ submit_text }}</button>
 
         <div class="alert alert-danger mt-2" v-if="error">
             {{ error }}
@@ -36,8 +38,8 @@
         data() {
             return {
                 connection: {
-                    from: '',
-                    to: '',
+                    from: null,
+                    to: null,
                     via: '',
                     time_to_station: '',
                 },

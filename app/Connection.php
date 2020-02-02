@@ -17,6 +17,10 @@ class Connection extends Model
         'to_location',
     ];
 
+    protected $with = [
+        'timetableEntries',
+    ];
+
     public function getDepartureAttribute($value)
     {
         return $value * 1000;
@@ -50,9 +54,19 @@ class Connection extends Model
         $this->belongsTo(User::class);
     }
 
+    public function timetableEntries()
+    {
+        return $this->hasMany(TimetableEntry::class);
+    }
+
     public function leaveInMinutes()
     {
-        $departure = Carbon::createFromTimestamp($this->departure / 1000);
+        $nextConnection = $this->timetableEntries()->first();
+        if (! $nextConnection) {
+            return 0;
+        }
+
+        $departure = Carbon::createFromTimestamp($nextConnection->departure_at_utc);
         $leaveAt = $departure->clone()->subMinutes($this->time_to_station)->timestamp;
         $diff = ($leaveAt - Carbon::now()->timestamp) / 60;
 

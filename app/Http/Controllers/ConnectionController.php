@@ -5,27 +5,11 @@ namespace App\Http\Controllers;
 use App\Connection;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
-use App\Services\ConnectionService;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ConnectionController extends Controller
 {
-    public function nextConnection(ConnectionService $connectionService, Request $request)
-    {
-        $lat = $request->lat;
-        $lng = $request->lng;
-
-        $connection = $connectionService->getNextConnection(auth()->user(), $lat, $lng);
-
-        if (! $connection) {
-            return null;
-        }
-
-        return $connection;
-    }
-
     public function store(StoreConnectionRequest $request)
     {
         $connection = auth()->user()->connections()->create([
@@ -49,12 +33,11 @@ class ConnectionController extends Controller
 
     public function makeDefault($id)
     {
-        auth()->user()->connections()->get()->map(function ($connection) {
-            $connection->selected = false;
-            $connection->save();
-        });
+        auth()->user()->connections()->update([
+            'selected' => false,
+        ]);
 
-        $connection = Connection::find($id);
+        $connection = Connection::findOrFail($id);
         $connection->selected = true;
         $connection->save();
     }

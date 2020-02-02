@@ -68,6 +68,12 @@ html, body, #app {
   border-color: transparent;
 }
 
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    border-radius: 10rem;
+    color: lightgray;
+    border: 3px solid lightgray;
+}
+
 .card {
   background-color: transparent;
   border: 2px solid #fff;
