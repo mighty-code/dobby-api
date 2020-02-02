@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\ConnectionController;
 use App\Http\Controllers\UserProfileController;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------

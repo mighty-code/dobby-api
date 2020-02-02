@@ -62,7 +62,7 @@ class Connection extends Model
     public function leaveInMinutes()
     {
         $nextConnection = $this->timetableEntries()->first();
-        if(!$nextConnection) {
+        if (! $nextConnection) {
             return 0;
         }
 

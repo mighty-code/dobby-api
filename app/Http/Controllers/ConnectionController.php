@@ -5,11 +5,7 @@ namespace App\Http\Controllers;
 use App\Connection;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
-use App\Http\Resources\ConnectionTimetableResource;
-use App\Http\Resources\NextConnectionResource;
-use App\Services\ConnectionService;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ConnectionController extends Controller
@@ -38,7 +34,7 @@ class ConnectionController extends Controller
     public function makeDefault($id)
     {
         auth()->user()->connections()->update([
-            'selected' => false
+            'selected' => false,
         ]);
 
         $connection = Connection::findOrFail($id);
