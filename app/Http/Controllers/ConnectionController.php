@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Connection;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
+use App\Http\Resources\ConnectionTimetableResource;
 use App\Http\Resources\NextConnectionResource;
 use App\Services\ConnectionService;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
@@ -13,20 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ConnectionController extends Controller
 {
-    public function nextConnection(ConnectionService $connectionService, Request $request)
-    {
-        $lat = $request->lat;
-        $lng = $request->lng;
-
-        $connection = $connectionService->getNextConnection(auth()->user(), $lat, $lng);
-
-        if (! $connection) {
-            return null;
-        }
-
-        return NextConnectionResource::make($connection);
-    }
-
     public function store(StoreConnectionRequest $request)
     {
         $connection = auth()->user()->connections()->create([

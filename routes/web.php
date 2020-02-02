@@ -37,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('user/connections', [ConnectionController::class, 'store']);
         Route::delete('user/connection/{id}', [ConnectionController::class, 'delete']);
         Route::resource('connections', ConnectionController::class);
-        Route::get('connection/next', [ConnectionController::class, 'nextConnection']);
         Route::post('connection/{id}/refresh', [ConnectionController::class, 'refreshConnection']);
         Route::post('connection/{id}/default', [ConnectionController::class, 'makeDefault']);
     });

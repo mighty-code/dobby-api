@@ -50,7 +50,7 @@
 
             async getNextConnection() {
                 try {
-                    const { data } = await axios.get('/connection/next')
+                    const { data } = await axios.get('/api/connections/next')
                      this.connection = data.data
                 } catch (error) {
                     console.log(error)
@@ -74,7 +74,7 @@
 
                 this.countdown = leaveIn;
 
-                if (this.countdown === 0)
+                if (this.countdown <= 0)
                     this.getNextConnection();
             }, 1000);
         }

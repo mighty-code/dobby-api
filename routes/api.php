@@ -17,5 +17,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', UserProfileController::class);
 
-    Route::get('connection/next', [ConnectionController::class, 'nextConnection']);
+    Route::get('connections/next', [ConnectionController::class, 'nextConnection']);
 });
