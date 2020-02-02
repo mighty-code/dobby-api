@@ -17,6 +17,10 @@ class Connection extends Model
         'to_location',
     ];
 
+    protected $with = [
+        'timetableEntries',
+    ];
+
     public function getDepartureAttribute($value)
     {
         return $value * 1000;

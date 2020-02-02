@@ -34,7 +34,7 @@ class CreateTimetableEntriesTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('connection_id')->references('id')->on('connections');
+            $table->foreign('connection_id')->references('id')->on('connections')->onDelete('cascade');
         });
     }
 
