@@ -19,7 +19,7 @@ class OnboardingController extends Controller
 
             'to' => $request->input('to.name'),
             'destination_id' => $request->input('to.stationId'),
-            'to_location' =>  new Point($request->input('to.latitude'), $request->input('to.longitude')),
+            'to_location' => new Point($request->input('to.latitude'), $request->input('to.longitude')),
 
             'time_to_station' => $request->time_to_station,
             'selected' => true,

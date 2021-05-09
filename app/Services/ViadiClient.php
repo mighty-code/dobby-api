@@ -35,7 +35,7 @@ class ViadiClient
         $connections = json_decode($this->client->request('GET', ViadiClient::BASE_URL.'/connection', [
             'query' => [
                 'from' => $from,
-                'to'   => $to,
+                'to' => $to,
                 'time' => $time,
                 $via,
             ],
