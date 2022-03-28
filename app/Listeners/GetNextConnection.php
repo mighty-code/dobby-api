@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Connection;
 use App\Events\UpdateNextConnection;
+use App\Models\Connection;
 use App\Services\ViadiClient;
 use Carbon\Carbon;
 use Grimzy\LaravelMysqlSpatial\Types\Point;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ConnectionController;
 use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use App\Http\Controllers\UserProfileController;
 |
 */
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', UserProfileController::class);
 
     Route::get('connections/next', [ConnectionController::class, 'nextConnection']);

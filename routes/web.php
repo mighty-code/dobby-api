@@ -15,7 +15,6 @@ use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\StationSearchController;
-use Rap2hpoutre\LaravelLogViewer\LogViewerController;
 
 Route::redirect('/', '/home');
 
@@ -47,6 +46,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('stations/search', StationSearchController::class);
 });
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin'], function () {
-    Route::get('logs', [LogViewerController::class, 'index'])->name('admin_logs');
-});

@@ -16,7 +16,15 @@ class SentryContext
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user() ? auth()->user() : auth()->guard('api')->user();
+        $guards = config('auth.guards');
+        $user = null;
+        foreach ($guards as $guard => $config) {
+            $user = auth()->user();
+            if ($user) {
+                break;
+            }
+        }
+
         if ($user && app()->bound('sentry')) {
             \Sentry\configureScope(function (Scope $scope) use ($user): void {
                 $scope->setUser([

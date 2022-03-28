@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Connection;
 use App\Events\SelectedConnectionUpdated;
 use App\Events\UpdateNextConnection;
 use App\Http\Requests\StoreConnectionRequest;
+use App\Models\Connection;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Support\Facades\Auth;
 
