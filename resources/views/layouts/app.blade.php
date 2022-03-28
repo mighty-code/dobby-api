@@ -8,34 +8,20 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Jarvis') }}</title>
+    <title>{{ config('app.name', 'Dobby') }}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
-          integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
 
     @include('includes.google-tag-manager')
-
-    @php
-        $user = Auth::user()
-    @endphp
-    @isset($user)
-    <script>
-        window.App = {
-            User:  @json($user->only(['id', 'name']))
-        }
-    </script>
-    @endisset
-
 </head>
-<body>
-<div id="app">
+<body class="bg-brand">
+<div>
 
     @include('includes.navbar')
 
@@ -44,10 +30,6 @@
 </div>
 
 
-
-
-
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
