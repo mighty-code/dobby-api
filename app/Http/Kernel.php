@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\FirstLogin;
+use App\Http\Middleware\NotFirstLogin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
