@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Events\UpdateNextConnection;
-use App\Models\Connection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -21,7 +20,7 @@ class ListConnections extends Component
     public function delete($connectionId)
     {
         $connection = auth()->user()->connections()->find($connectionId);
-        if (!$connection->selected) {
+        if (! $connection->selected) {
             $connection->delete();
         }
     }

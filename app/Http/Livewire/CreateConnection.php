@@ -44,7 +44,7 @@ class CreateConnection extends Component
 
     public function toggleVia()
     {
-        $this->showVia = !$this->showVia;
+        $this->showVia = ! $this->showVia;
     }
 
     public function stationSelected($event)
@@ -96,6 +96,5 @@ class CreateConnection extends Component
         }
 
         $this->reset();
-
     }
 }

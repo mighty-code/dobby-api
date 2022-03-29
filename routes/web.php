@@ -11,7 +11,6 @@
 |
 */
 
-use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\HomeController;
 
 Route::redirect('/', '/home');
