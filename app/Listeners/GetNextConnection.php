@@ -70,12 +70,12 @@ class GetNextConnection
 
         $timetableEntry = [
             'departure_from' => Arr::get($connection, 'from.location.name'),
-            'departure_at_utc' => Arr::get($connection, 'from.time') / 1000,
+            'departure_at' => Carbon::createFromTimestampUTC(Arr::get($connection, 'from.time') / 1000),
             'departure_delay' => Arr::get($connection, 'from.delay'),
             'departure_platform' => Arr::get($connection, 'from.platform'),
 
             'arrival_to' => Arr::get($connection, 'to.location.name'),
-            'arrival_at_utc' => Arr::get($connection, 'to.time') / 1000,
+            'arrival_at' => Carbon::createFromTimestampUTC(Arr::get($connection, 'to.time') / 1000),
             'arrival_delay' => Arr::get($connection, 'to.delay'),
             'arrival_platform' => Arr::get($connection, 'to.platform'),
 

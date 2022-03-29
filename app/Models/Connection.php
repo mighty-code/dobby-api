@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\TimetableEntry;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use MatanYadaev\EloquentSpatial\Objects\Point;
 use MatanYadaev\EloquentSpatial\SpatialBuilder;
@@ -15,6 +15,8 @@ class Connection extends Model
     protected $casts = [
         'from_location' => Point::class,
         'to_location' => Point::class,
+        'arrival_at' => 'datetime',
+        'departure_at' => 'datetime',
     ];
 
     protected $with = [
@@ -66,8 +68,8 @@ class Connection extends Model
             return 0;
         }
 
-        $departure = Carbon::createFromTimestamp($nextConnection->departure_at_utc);
-        $leaveAt = $departure->clone()->subMinutes($this->time_to_station)->timestamp;
+        $departure = CarbonImmutable::createFromTimestamp($nextConnection->departure_at);
+        $leaveAt = $departure->subMinutes($this->time_to_station)->timestamp;
         $diff = ($leaveAt - Carbon::now()->timestamp) / 60;
 
         return floor($diff);
