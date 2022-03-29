@@ -29,13 +29,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::view('/manage', 'manage')->name('manage');
         Route::view('/api/manage', 'api.manage')->name('api.manage');
-
-        Route::get('user/connections', [ConnectionController::class, 'myConnections']);
-        Route::post('user/connections', [ConnectionController::class, 'store']);
-        Route::delete('user/connection/{id}', [ConnectionController::class, 'delete']);
-        Route::resource('connections', ConnectionController::class);
-        Route::post('connection/{id}/refresh', [ConnectionController::class, 'refreshConnection']);
-        Route::post('connection/{id}/default', [ConnectionController::class, 'makeDefault']);
     });
 
     Route::view('/onboarding', 'onboarding')->name('onboarding');

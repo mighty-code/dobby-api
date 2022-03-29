@@ -48,48 +48,4 @@
         color: #fff !important;
         opacity: 1; /* Firefox */
     }
-
-    .btn-outline-primary {
-        color: #fff;
-        background: transparent none;
-        border-color: transparent;
-    }
-
-    .btn-outline-primary:hover {
-        background-color: transparent;
-        border-color: transparent;
-    }
-
-    .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-        border-radius: 10rem;
-        color: lightgray;
-        border: 3px solid lightgray;
-    }
-
-    .card {
-        background-color: transparent;
-        border: 2px solid #fff;
-        border-radius: 10rem;
-    }
-
-    .tag {
-        width: 100%;
-        background-color: transparent;
-        border: 1px solid #fff;
-        padding: 0.9rem;
-        border-radius: 3rem;
-    }
-
-    .card-header {
-        background-color: transparent;
-        border-bottom: none;
-    }
-
-    .modal-content {
-        background-color: #1A86E0;
-    }
-
-    .modal-title {
-        color: #fff;
-    }
 }

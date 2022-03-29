@@ -17,14 +17,17 @@ class CreateConnection extends Component
     public bool $showVia = false;
 
     public $station = null;
+    public $stationName = null;
 
     public $destination = null;
+    public $destinationName = null;
 
     public $via = null;
+    public $viaName = null;
 
     public ?string $time_to_station = null;
 
-    protected $listeners = ['stationSelected'];
+    protected $listeners = ['stationSelected', '$refresh'];
 
     public bool $onboarding = false;
 
@@ -52,10 +55,10 @@ class CreateConnection extends Component
     public function create()
     {
         $this->validate([
-            'station' => 'required',
-            'destination' => 'required',
-            'via' => 'nullable',
-            'time_to_station' => 'nullable',
+            'station' => ['required', 'array'],
+            'destination' => ['required', 'array'],
+            'via' => ['nullable', 'array'],
+            'time_to_station' => ['required', 'int'],
         ]);
 
         $connection = Connection::make([
@@ -68,6 +71,7 @@ class CreateConnection extends Component
             'to_location' => new Point($this->destination['latitude'], $this->destination['longitude']),
 
             'via_id' => $this->via['stationId'] ?? null,
+            'via' => $this->via['name'] ?? null,
             'time_to_station' => $this->time_to_station,
         ]);
 
@@ -87,10 +91,11 @@ class CreateConnection extends Component
 
         $this->emit('connectionCreated');
 
-        if($this->onboarding) {
+        if ($this->onboarding) {
             return $this->redirectRoute('home');
-        } else {
-            $this->reset();
         }
+
+        $this->reset();
+
     }
 }
