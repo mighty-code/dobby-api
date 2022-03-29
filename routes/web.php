@@ -13,8 +13,6 @@
 
 use App\Http\Controllers\ConnectionController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OnboardingController;
-use App\Http\Controllers\StationSearchController;
 
 Route::redirect('/', '/home');
 
@@ -41,7 +39,4 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::view('/onboarding', 'onboarding')->name('onboarding');
-    Route::post('/onboarding', OnboardingController::class)->name('onboarding.store');
-
-    Route::get('stations/search', StationSearchController::class);
 });

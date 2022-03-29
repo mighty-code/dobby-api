@@ -15,21 +15,21 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
-
+    @livewireStyles
 
     @include('includes.google-tag-manager')
 </head>
-<body class="bg-brand">
-<div>
+<body class="bg-brand h-screen">
 
-    @include('includes.navbar')
+@include('includes.navbar')
 
-    @yield('content')
+@yield('content')
 
-</div>
 
 
 <!-- Scripts -->
+@livewireScripts
 </body>
 </html>

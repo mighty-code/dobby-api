@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Connection;
 use App\Events\UpdateNextConnection;
-use App\User;
+use App\Models\User;
 
 class ConnectionService
 {

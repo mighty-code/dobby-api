@@ -2,21 +2,19 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
+use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Http;
 
 class ViadiClient
 {
-    const BASE_URL = 'http://free.viapi.ch/v1';
+    public const BASE_URL = 'http://free.viapi.ch/v1';
 
-    public $client;
+    public PendingRequest $client;
 
-    /**
-     * ViadiClient constructor.
-     */
     public function __construct()
     {
-        $this->client = new Client([
-            'headers' => ['API-Key' => config('services.viadi.api-key')],
+        $this->client = Http::withHeaders([
+            'API-Key' => config('services.viadi.api-key'),
         ]);
     }
 
@@ -28,29 +26,29 @@ class ViadiClient
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getConnections($from, $to, $via = null, $time)
+    public function getConnections($from, $to, $via, $time)
     {
-        $via = $via ? ['via' => $via] : null;
+        $via = $via ? ['via' => $via] : [];
 
-        $connections = json_decode($this->client->request('GET', ViadiClient::BASE_URL.'/connection', [
-            'query' => [
-                'from' => $from,
-                'to' => $to,
-                'time' => $time,
-                $via,
-            ],
-        ])->getBody())->connections;
+        $response = $this->client->get(ViadiClient::BASE_URL.'/connection', [
+            'from' => $from,
+            'to' => $to,
+            'time' => $time,
+            ...$via,
+        ])
+            ->throw()
+            ->json();
 
-        return collect($connections);
+        return collect($response['connections']);
     }
 
     public function searchStation($query)
     {
-        $stations = json_decode($this->client->request('GET', ViadiClient::BASE_URL.'/stations', [
-            'query' => [
-                'query' => $query,
-            ],
-        ])->getBody());
+        $stations = $this->client->get(ViadiClient::BASE_URL.'/stations', [
+            'query' => $query,
+        ])
+            ->throw()
+            ->json();
 
         return $stations;
     }
