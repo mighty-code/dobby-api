@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,12 +45,11 @@ class User extends Authenticatable
 
     public function name(): Attribute
     {
-        return Attribute::set(fn($value) => ucfirst($value));
+        return Attribute::set(fn ($value) => ucfirst($value));
     }
 
     public function connections()
     {
         return $this->hasMany(Connection::class);
     }
-
 }
