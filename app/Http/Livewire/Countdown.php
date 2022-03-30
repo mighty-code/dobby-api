@@ -13,7 +13,7 @@ class Countdown extends Component
         $connectionService = resolve(ConnectionService::class);
         $nextConnection = $connectionService->getNextConnection(auth()->user());
         $nextTimeTableEntry = $nextConnection->timetableEntries()->first();
-ray($nextTimeTableEntry);
+
         return view('livewire.countdown', [
             'timetableEntry' => $nextTimeTableEntry,
             'countdown' => $this->getCountdown($nextConnection),

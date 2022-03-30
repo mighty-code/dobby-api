@@ -35,14 +35,14 @@ class SearchStationInput extends Component
 
     public function setStation($stationId)
     {
-        if (! Cache::has('search-station-input-'.$this->search)) {
+        if (!Cache::has('search-station-input-' . $this->search)) {
             $this->searchStations();
 
             return;
         }
 
         /** @var Collection<Connection> $connections */
-        $connections = Cache::get('search-station-input-'.$this->search);
+        $connections = Cache::get('search-station-input-' . $this->search);
         $station = $connections->where('stationId', $stationId)->first();
 
         $this->search = $station['name'];
@@ -71,15 +71,12 @@ class SearchStationInput extends Component
             return [];
         }
 
-        if (Cache::has('search-station-input-'.$this->search)) {
-            $connections = Cache::get('search-station-input-'.$this->search);
+        if (Cache::has('search-station-input-' . $this->search)) {
+            $connections = Cache::get('search-station-input-' . $this->search);
         } else {
-            ray()->showHttpClientRequests();
             $connections = collect(resolve(ViadiClient::class)->searchStation($this->search));
-            Cache::set('search-station-input-'.$this->search, $connections, now()->addMinutes(5));
+            Cache::set('search-station-input-' . $this->search, $connections, now()->addMinutes(5));
         }
-
-        ray($connections);
 
         return $connections->toArray();
     }
