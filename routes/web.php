@@ -10,19 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 use App\Http\Controllers\HomeController;
-
 Route::redirect('/', '/home');
-
-Route::get('/imprint', function () {
-    return view('imprint');
-});
-
+Route::get('/imprint', fn() => view('imprint'));
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Auth::routes();
 });
-
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['notFirstLogin'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
