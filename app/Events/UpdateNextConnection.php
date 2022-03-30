@@ -13,14 +13,11 @@ class UpdateNextConnection
     use InteractsWithSockets;
     use SerializesModels;
 
-    public $id;
-
     /**
      * Create a new event instance.
      */
-    public function __construct($id)
+    public function __construct(public $id)
     {
-        $this->id = $id;
     }
 
     /**
