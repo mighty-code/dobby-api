@@ -26,7 +26,7 @@ class Countdown extends Component
 
         if ($countdown <= 0) {
             $countdown = 'now';
-        } else if ($countdown > 60) {
+        } elseif ($countdown > 60) {
             $countdown = '>60';
         }
 

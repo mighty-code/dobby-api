@@ -65,9 +65,9 @@ class GetNextConnection
     public function saveTimetableEntries($connection, Connection $connectionModel)
     {
         $route = collect($connection['sections'])
-            ->filter(fn($section) => isset($section['route']))
-            ->map(fn($section) => $section['route'])
-            ->map(fn($route) => $route['name']);
+            ->filter(fn ($section) => isset($section['route']))
+            ->map(fn ($section) => $section['route'])
+            ->map(fn ($route) => $route['name']);
 
         $timetableEntry = [
             'departure_from' => Arr::get($connection, 'from.location.name'),

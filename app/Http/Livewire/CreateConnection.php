@@ -17,12 +17,15 @@ class CreateConnection extends Component
     public bool $showVia = false;
 
     public $station = null;
+
     public $stationName = null;
 
     public $destination = null;
+
     public $destinationName = null;
 
     public $via = null;
+
     public $viaName = null;
 
     public ?string $time_to_station = null;

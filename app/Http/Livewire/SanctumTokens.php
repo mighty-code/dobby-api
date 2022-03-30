@@ -7,6 +7,7 @@ use Livewire\Component;
 class SanctumTokens extends Component
 {
     public string $tokenName = '';
+
     public string $tokenPlain = '';
 
     public function render()
