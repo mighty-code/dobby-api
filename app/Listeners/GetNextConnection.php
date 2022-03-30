@@ -32,6 +32,7 @@ class GetNextConnection
      */
     public function handle(UpdateNextConnection $event)
     {
+        /** @var Connection $connectionModel */
         $connectionModel = Connection::find($event->id);
 
         $leaveIn = $connectionModel->leaveInMinutes();

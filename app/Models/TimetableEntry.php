@@ -11,5 +11,7 @@ class TimetableEntry extends Model
     protected $casts = [
         'data' => 'json',
         'route' => 'array',
+        'arrival_at' => 'datetime',
+        'departure_at' => 'datetime',
     ];
 }

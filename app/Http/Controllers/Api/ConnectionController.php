@@ -21,7 +21,8 @@ class ConnectionController extends Controller
             return null;
         }
 
-        return NextConnectionResource::make($connection);
+        $nextConnection = $this->timetableEntries()->first();
+        return NextConnectionResource::make($nextConnection);
     }
 
     public function timetable(ConnectionService $connectionService, Request $request)

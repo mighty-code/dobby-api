@@ -8,16 +8,6 @@
         height: 100%;
     }
 
-    .countdown {
-        font-size: 20rem;
-    }
-
-    .frame {
-        border: 1px solid #fff;
-        padding: 1rem;
-        border-radius: 10rem;
-    }
-
     .connection-text {
         text-align: center;
         font-size: 2rem;

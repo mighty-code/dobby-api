@@ -15,8 +15,6 @@ class Connection extends Model
     protected $casts = [
         'from_location' => Point::class,
         'to_location' => Point::class,
-        'arrival_at' => 'datetime',
-        'departure_at' => 'datetime',
     ];
 
     protected $with = [
@@ -61,15 +59,15 @@ class Connection extends Model
         return $this->hasMany(TimetableEntry::class);
     }
 
-    public function leaveInMinutes()
+    public function leaveInMinutes(): ?float
     {
         $nextConnection = $this->timetableEntries()->first();
         if (! $nextConnection) {
-            return 0;
+            return null;
         }
 
-        $departure = CarbonImmutable::createFromTimestamp($nextConnection->departure_at);
-        $leaveAt = $departure->subMinutes($this->time_to_station)->timestamp;
+        $departure = $nextConnection->departure_at;
+        $leaveAt = $departure->clone()->subMinutes($this->time_to_station)->timestamp;
         $diff = ($leaveAt - Carbon::now()->timestamp) / 60;
 
         return floor($diff);
