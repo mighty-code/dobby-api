@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Connection;
+use App\Models\Connection;
 use Carbon\Carbon;
 use Tests\TestCase;
 

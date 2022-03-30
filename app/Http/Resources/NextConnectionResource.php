@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\TimetableEntry;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class NextConnectionResource extends JsonResource
@@ -14,14 +15,17 @@ class NextConnectionResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        /** @var TimetableEntry $nextConnection */
+        $nextConnection = $this->resource;
+
         $data = parent::toArray($request);
 
-        $nextConnection = $this->timetableEntries()->first();
-        $data['departure'] = $nextConnection->departure_at_utc;
+        $data['departure'] = $nextConnection->departure_at->toIso8601String();
         $data['departure_delay'] = $nextConnection->departure_delay;
         $data['departure_platform'] = $nextConnection->departure_platform;
 
-        $data['arrival'] = $nextConnection->arrival_at_utc;
+        $data['arrival'] = $nextConnection->arrival_at->toIso8601String();
         $data['arrival_delay'] = $nextConnection->arrival_delay;
         $data['arrival_platform'] = $nextConnection->arrival_platform;
 

@@ -2,11 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Connection;
 use App\Events\UpdateNextConnection;
+use App\Models\Connection;
 use App\Services\ViadiClient;
 use Carbon\Carbon;
-use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Illuminate\Support\Arr;
+use MatanYadaev\EloquentSpatial\Objects\Point;
 
 class GetNextConnection
 {
@@ -25,12 +26,13 @@ class GetNextConnection
     /**
      * Handle the event.
      *
-     * @param  UpdateNextConnection $event
+     * @param UpdateNextConnection $event
      *
      * @return void
      */
     public function handle(UpdateNextConnection $event)
     {
+        /** @var Connection $connectionModel */
         $connectionModel = Connection::find($event->id);
 
         $leaveIn = $connectionModel->leaveInMinutes();
@@ -48,10 +50,10 @@ class GetNextConnection
 
         // Update connection with the latest infos
         $nextConnection = $connections->first();
-        $connectionModel->from = $nextConnection->from->location->name;
-        $connectionModel->from_location = new Point($nextConnection->from->location->latitude, $nextConnection->from->location->longitude);
-        $connectionModel->to = $nextConnection->to->location->name;
-        $connectionModel->to_location = new Point($nextConnection->to->location->latitude, $nextConnection->to->location->longitude);
+        $connectionModel->from = Arr::get($nextConnection, 'from.location.name');
+        $connectionModel->from_location = new Point(Arr::get($nextConnection, 'from.location.latitude'), Arr::get($nextConnection, 'from.location.longitude'));
+        $connectionModel->to = Arr::get($nextConnection, 'to.location.name');
+        $connectionModel->to_location = new Point(Arr::get($nextConnection, 'to.location.latitude'), Arr::get($nextConnection, 'to.location.longitude'));
         $connectionModel->save();
 
         $connectionModel->timetableEntries()->delete();
@@ -62,22 +64,23 @@ class GetNextConnection
 
     public function saveTimetableEntries($connection, Connection $connectionModel)
     {
-        $sections = collect($connection->sections)->filter(fn ($section) => isset($section->route));
-        $routes = $sections->map(fn ($section) => $section->route);
-        $route = $routes->map(fn ($route) => $route->name);
+        $route = collect($connection['sections'])
+            ->filter(fn($section) => isset($section['route']))
+            ->map(fn($section) => $section['route'])
+            ->map(fn($route) => $route['name']);
 
         $timetableEntry = [
-            'departure_from' => $connection->from->location->name,
-            'departure_at_utc' => $connection->from->time / 1000,
-            'departure_delay' => $connection->from->delay,
-            'departure_platform' => data_get($connection, 'from.platform'),
+            'departure_from' => Arr::get($connection, 'from.location.name'),
+            'departure_at' => Carbon::createFromTimestampUTC(Arr::get($connection, 'from.time') / 1000),
+            'departure_delay' => Arr::get($connection, 'from.delay'),
+            'departure_platform' => Arr::get($connection, 'from.platform'),
 
-            'arrival_to' => $connection->to->location->name,
-            'arrival_at_utc' => $connection->to->time / 1000,
-            'arrival_delay' => $connection->to->delay,
-            'arrival_platform' =>  data_get($connection, 'to.platform'),
+            'arrival_to' => Arr::get($connection, 'to.location.name'),
+            'arrival_at' => Carbon::createFromTimestampUTC(Arr::get($connection, 'to.time') / 1000),
+            'arrival_delay' => Arr::get($connection, 'to.delay'),
+            'arrival_platform' => Arr::get($connection, 'to.platform'),
 
-            'duration_minutes' => $this->duration($connection->duration),
+            'duration_minutes' => $this->duration($connection['duration']),
             'route' => $route,
             'data' => $connection,
         ];
@@ -85,12 +88,12 @@ class GetNextConnection
         $connectionModel->timetableEntries()->create($timetableEntry);
     }
 
-    protected function duration($durationMs)
+    protected function duration($durationMs): float|int
     {
         return $durationMs / 1000 / 60;
     }
 
-    protected function time($timeToStation)
+    protected function time($timeToStation): float|int
     {
         return Carbon::now()->addMinutes($timeToStation)->timestamp * 1000;
     }
