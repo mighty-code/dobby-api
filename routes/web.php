@@ -29,5 +29,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/download/extension', function () {
-    return response()->download(public_path('extension.crx'),'dobby-extension.crx', ['Content-Type' => 'application/octet-stream']);
+    return response()->download(public_path('extension.crx'), 'dobby-extension.crx', ['Content-Type' => 'application/octet-stream']);
 });
