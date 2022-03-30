@@ -18,7 +18,7 @@ class NotFirstLogin
         if (! auth()->user()->first_login) {
             return $next($request);
         } else {
-            return redirect()->route('onboarding');
+            return to_route('onboarding');
         }
     }
 }
