@@ -6,9 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-
+return new class extends Migration {
     public function up()
     {
         Schema::table('timetable_entries', function (Blueprint $table) {
@@ -27,5 +25,4 @@ return new class extends Migration
             $table->dropColumn('arrival_at_utc');
         });
     }
-
 };

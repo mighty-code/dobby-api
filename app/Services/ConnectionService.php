@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Connection;
 use App\Events\UpdateNextConnection;
+use App\Models\Connection;
 use App\Models\User;
 
 class ConnectionService
@@ -29,8 +29,8 @@ class ConnectionService
     private function getNearestConnection($user, $lat, $lng): Connection
     {
         // sanitize params
-        $lat = (float)$lat;
-        $lng = (float)$lng;
+        $lat = (float) $lat;
+        $lng = (float) $lng;
 
         $point = "POINT({$lng} {$lat})";
         $connection = $user
