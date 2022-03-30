@@ -24,9 +24,16 @@ class StoreConnectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'from' => 'required',
-            'to' => 'required',
-            'time_to_station' => 'required|integer',
+            'from' => [
+                'required',
+            ],
+            'to' => [
+                'required',
+            ],
+            'time_to_station' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

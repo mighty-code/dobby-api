@@ -11,16 +11,13 @@ use MatanYadaev\EloquentSpatial\Objects\Point;
 
 class GetNextConnection
 {
-    public $viadiClient;
-
     /**
      * Create the event listener.
      *
      * @param ViadiClient $viadiClient
      */
-    public function __construct(ViadiClient $viadiClient)
+    public function __construct(public ViadiClient $viadiClient)
     {
-        $this->viadiClient = $viadiClient;
     }
 
     /**
