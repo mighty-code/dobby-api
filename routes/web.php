@@ -17,6 +17,7 @@ Route::get('/imprint', fn () => view('imprint'));
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Auth::routes();
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['notFirstLogin'])->group(function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -25,4 +26,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::view('/onboarding', 'onboarding')->name('onboarding');
+});
+
+Route::get('/download/extension', function () {
+    return response()->download(public_path('extension.crx'),'dobby-extension.crx', ['Content-Type' => 'application/octet-stream']);
 });

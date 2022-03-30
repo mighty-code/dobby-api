@@ -21,7 +21,7 @@
                                 <x-icons.clock class="w-7 h-7"/>
                                 <div>Connections</div>
                             </a>
-                            <a href="{{ url('storage/extension.crx')}}" target="_blank"
+                            <a href="{{ url('download/extension')}}" target="_blank"
                                class="flex space-x-1">
                                 <x-icons.computer class="w-7 h-7"/>
                                 <div>Chrome Extension</div>
