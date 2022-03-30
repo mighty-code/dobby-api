@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ env('APP_NAME') }}</title>
+        <title>{{ config('app.name') }}</title>
 
         <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
 
@@ -90,7 +90,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ env('APP_NAME') }}
+                    {{ config('app.name') }}
                 </div>
                 <p class="subtitle">Catch your next connection</p>
             </div>

@@ -9,7 +9,6 @@
                 <x-goto-home/>
             </div>
 
-
             <div class="w-full md:w-1/2 lg:w-1/2 mt-10 flex flex-col space-y-8">
                 <div class="flex justify-center py-4">
                     <x-icons.train class="text-white h-20"/>
