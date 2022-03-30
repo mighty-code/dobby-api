@@ -11,8 +11,9 @@
 |
 */
 use App\Http\Controllers\HomeController;
+
 Route::redirect('/', '/home');
-Route::get('/imprint', fn() => view('imprint'));
+Route::get('/imprint', fn () => view('imprint'));
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Auth::routes();
 });
