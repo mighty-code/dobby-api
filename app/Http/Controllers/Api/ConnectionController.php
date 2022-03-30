@@ -22,6 +22,7 @@ class ConnectionController extends Controller
         }
 
         $nextConnection = $this->timetableEntries()->first();
+
         return NextConnectionResource::make($nextConnection);
     }
 
